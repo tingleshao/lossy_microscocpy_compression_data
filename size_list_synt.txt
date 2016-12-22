@@ -1,0 +1,65 @@
+\exp_01
+28688	qp_2.mkv
+26644	qp_4.mkv
+24556	qp_6.mkv
+22708	qp_8.mkv
+21964	qp_9.mkv
+21136	qp_10.mkv
+20208	qp_11.mkv
+19508	qp_12.mkv
+18936	qp_13.mkv
+18140	qp_14.mkv
+14592	qp_20.mkv
+8832	qp_30.mkv
+2548	qp_40.mkv
+80	qp_50.mkv
+\exp_02
+612388	test_01/qp_2.mkv
+568132	test_01/qp_4.mkv
+521328	test_01/qp_6.mkv
+480240	test_01/qp_8.mkv
+448328	test_01/qp_10.mkv
+410928	test_01/qp_12.mkv
+380976	test_01/qp_14.mkv
+357996	test_01/qp_16.mkv
+332772	test_01/qp_18.mkv
+307548	test_01/qp_20.mkv
+283568	test_01/qp_22.mkv
+255876	test_01/qp_24.mkv
+230268	test_01/qp_26.mkv
+207352	test_01/qp_28.mkv
+181496	test_01/qp_30.mkv
+51972	test_01/qp_40.mkv
+31468	test_01/qp_41.mkv
+17660	test_01/qp_42.mkv
+7896	test_01/qp_43.mkv
+988	test_01/qp_44.mkv
+772	test_01/qp_45.mkv
+608	test_01/qp_46.mkv
+444	test_01/qp_47.mkv
+312	test_01/qp_48.mkv
+216	test_01/qp_49.mkv
+116	test_01/qp_50.mkv
+\exp_03/04
+30016	dilate_25.mkv
+30016	dilate_24.mkv
+27832	dilate_23.mkv
+27832	dilate_22.mkv
+25576	dilate_21.mkv
+25576	dilate_20.mkv
+23164	dilate_19.mkv
+23164	dilate_18.mkv
+20976	dilate_17.mkv
+20976	dilate_16.mkv
+18824	dilate_15.mkv
+18824	dilate_14.mkv
+16980	dilate_13.mkv
+16980	dilate_12.mkv
+15112	dilate_11.mkv
+9112	dilate_10.mkv
+8040	dilate_9.mkv
+8040	dilate_8.mkv
+7120	dilate_7.mkv
+7120	dilate_6.mkv
+
+
