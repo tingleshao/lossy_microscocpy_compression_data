@@ -9,11 +9,13 @@
 % exp_03: lossy_comp_by_dilation
 % exp_04: lossy_comp_by_dilation_noise_back
 
+
 exp_01_qp_list = [2 4 6 8 10 11 12 13 14 20 30 40 50];
 exp_02_qp_list = [41 42 43 44 45 46 47 48 49 50];
 exp_03_dilation_list = [6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25];
 exp_04_dilation_list = exp_03_dilation_list;
 exp_05_qp_list = exp_01_qp_list;
+
 
 exp_01_dir = '/playpen2/cshao/paper2_data/lossy_comp_video_size_exp_chart/sheet1_custom_ffmpeg/test_';
 exp_02_dir = '/playpen2/cshao/paper2_data/lossy_comp_video_size_exp_chart/sheet2_standard_ffmpeg/test_';
@@ -94,7 +96,7 @@ size(chosen_exp_04_msd_mean)
 
 figure
 hold on 
-plot(exp_01_avg_file_compression_ratios, chosen_exp_01_msd_mean, '-.k*',exp_02_avg_file_compression_ratios, chosen_exp_02_msd_mean, '--ko',exp_03_avg_file_compression_ratios, chosen_exp_03_msd_mean, ':ks',exp_03_avg_file_compression_ratios, chosen_exp_04_msd_mean, '-kx',exp_01_avg_file_compression_ratios, chosen_exp_05_msd_mean, '->k', exp_02_avg_file_compression_ratios, ones(size(exp_02_avg_file_sizes)), 'k-')
+plot(exp_01_avg_file_compression_ratios, chosen_exp_01_msd_mean, '-.k*', exp_02_avg_file_compression_ratios, chosen_exp_02_msd_mean, '--ko',exp_03_avg_file_compression_ratios, chosen_exp_03_msd_mean, ':ks',exp_03_avg_file_compression_ratios, chosen_exp_04_msd_mean, '-kx',exp_01_avg_file_compression_ratios, chosen_exp_05_msd_mean, '->k', exp_02_avg_file_compression_ratios, ones(size(exp_02_avg_file_sizes)), 'k-')
 legend('custom ffmpeg (variation 2)', 'standard ffmpeg', 'dilation (variation 1)', 'dilation with post-processing (variation 1)', 'custom ffmpeg post-processing (variation 2)', 'Location', 'northeast');
 hold off 
 xlabel('file size in bytes');
