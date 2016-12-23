@@ -1,6 +1,14 @@
 function [ exp_msd_means, exp_msd_stdevs ] = compute_mean_stdev_over_tests_for_different_params( param_list, test_list, exp_dir, param_name)
 %COMPUTE_MEAN_STDEV_OVER_TESTS_FOR_DIFFERENT_PARAMS Summary of this function goes here
 %   Detailed explanation goes here
+
+% this function does the following: 
+% for different params
+%  for different test id 
+%     read the MSD data from the given msd file
+% 
+% give the list of means and stddevs for al different params
+
 exp_msd_means = [];
 exp_msd_stdevs = [];
 exp_msd_for_curr_param = [];
