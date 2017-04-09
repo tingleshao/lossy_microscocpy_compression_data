@@ -102,3 +102,9 @@ hold off
 xlabel('file size in bytes');
 ylabel('MSDs for fixed \tau scaled by the values on original video');
 
+% TODO: make another plot with two comparisons and the analysis-aware
+% result
+
+
+
+% TODO: make another plot (same) on real video.
