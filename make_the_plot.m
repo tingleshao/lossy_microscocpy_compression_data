@@ -23,6 +23,12 @@ exp_05_qp_list = exp_01_qp_list;
 %exp_04_dir = '/playpen2/cshao/paper2_data/lossy_comp_video_size_exp_chart/sheet4_lossy_comp_by_dilation_noise_back/test_';
 %ref_dir = '/playpen2/cshao/paper2_data/lossy_comp_video_size_exp_chart/reference_msds/test_';
 %exp_05_dir = '/playpen2/cshao/paper2_data/lossy_comp_video_size_exp_chart/sheet4_5_custom_ffmpeg_noise_back/test_';
+exp_01_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet1/test_';
+exp_02_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet2/test_';
+exp_03_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet3/test_';
+exp_04_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet4/test_';
+ref_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/reference_msds/test_';
+exp_05_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet4_5/test_';
 
 % read the bead msd datas and generate the result
 [exp_01_msd_means, exp_01_msd_stdevs] = compute_mean_stdev_over_tests_for_different_params(exp_01_qp_list, 1:10, exp_01_dir, 'qp');
