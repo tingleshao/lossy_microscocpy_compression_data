@@ -23,6 +23,7 @@ exp_05_qp_list = exp_01_qp_list;
 %exp_04_dir = '/playpen2/cshao/paper2_data/lossy_comp_video_size_exp_chart/sheet4_lossy_comp_by_dilation_noise_back/test_';
 %ref_dir = '/playpen2/cshao/paper2_data/lossy_comp_video_size_exp_chart/reference_msds/test_';
 %exp_05_dir = '/playpen2/cshao/paper2_data/lossy_comp_video_size_exp_chart/sheet4_5_custom_ffmpeg_noise_back/test_';
+
 exp_01_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet1/test_';
 exp_02_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet2/test_';
 exp_03_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet3/test_';
@@ -36,7 +37,6 @@ exp_05_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/shee
 [exp_03_msd_means, exp_03_msd_stdevs] = compute_mean_stdev_over_tests_for_different_params(exp_03_dilation_list, 1:10, exp_03_dir, 'dilate');
 [exp_04_msd_means, exp_04_msd_stdevs] = compute_mean_stdev_over_tests_for_different_params(exp_04_dilation_list, 1:10, exp_04_dir, 'dilate');
 [exp_05_msd_means, exp_05_msd_stdevs] = compute_mean_stdev_over_tests_for_different_params(exp_05_qp_list, 1:10, exp_05_dir, 'qp');
-
 
 % read the reference (original video) msd data 
 exp_msd = []; 
@@ -55,12 +55,15 @@ exp_01_avg_file_sizes = compute_file_sizes_for_the_exp(exp_01_dir, exp_01_qp_lis
 exp_02_avg_file_sizes = compute_file_sizes_for_the_exp(exp_02_dir, exp_02_qp_list, 1:10, 'qp');
 exp_03_avg_file_sizes = compute_file_sizes_for_the_exp(exp_03_dir, exp_03_dilation_list, 1:10, 'dilate');
 
+exp_01_avg_file_sizes = [2.9377, 2.7286, 2.5144, 2.3255, 2.1645    2.0695    1.9982    1.9397    1.8577    1.4946    0.9047    0.2608    0.0077];
+exp_02_avg_file_sizes = [3.2210, 1.8080, 0.8109, 0.1010, 0.0793    0.0626    0.0455    0.0317    0.0218    0.0114];
+exp_03_avg_file_sizes = [1.1429, 1.1429, 1.2968, 1.2968, 1.4847    1.5462    1.7418    1.7418    1.9310    1.9310    2.1467    2.1467    2.3714    2.3714    2.6163    2.6163    2.8493    2.8493    3.0714    3.0714];
+
 test_video_size = 569230200;
 
 exp_01_avg_file_compression_ratios = log(test_video_size ./ exp_01_avg_file_sizes);
 exp_02_avg_file_compression_ratios = log(test_video_size ./ exp_02_avg_file_sizes);
 exp_03_avg_file_compression_ratios = log(test_video_size ./ exp_03_avg_file_sizes);
-
 
 % normalize the values. exp04 is noise added back, same size as exp_03
 exp_ref_msd_mean_divider_01 = repmat(exp_ref_msd_mean,[1, length(exp_01_qp_list)]);
@@ -68,7 +71,6 @@ exp_ref_msd_mean_divider_02 = repmat(exp_ref_msd_mean,[1, length(exp_02_qp_list)
 exp_ref_msd_mean_divider_03 = repmat(exp_ref_msd_mean,[1, length(exp_03_dilation_list)]);
 exp_ref_msd_mean_divider_04 = repmat(exp_ref_msd_mean,[1, length(exp_04_dilation_list)]);
 exp_ref_msd_mean_divider_05 = repmat(exp_ref_msd_mean,[1, length(exp_05_qp_list)]);
-
 
 exp_01_msd_means = exp_01_msd_means ./ exp_ref_msd_mean_divider_01;
 exp_02_msd_means = exp_02_msd_means ./ exp_ref_msd_mean_divider_02;
@@ -89,20 +91,20 @@ chosen_exp_03_msd_mean = exp_03_msd_means(tau_index, :);
 chosen_exp_04_msd_mean = exp_04_msd_means(tau_index, :);
 chosen_exp_05_msd_mean = exp_05_msd_means(tau_index, :);
 
-
 chosen_exp_01_msd_stdev = exp_01_msd_stdevs(tau_index, :); 
 chosen_exp_02_msd_stdev = exp_02_msd_stdevs(tau_index, :); 
 chosen_exp_03_msd_stdev = exp_03_msd_stdevs(tau_index, :); 
 chosen_exp_04_msd_stdev = exp_04_msd_stdevs(tau_index, :); 
 chosen_exp_05_msd_stdev = exp_05_msd_stdevs(tau_index, :); 
 
-
 size(exp_03_avg_file_sizes)
 size(chosen_exp_04_msd_mean)
 
 figure
 hold on 
-plot(exp_01_avg_file_compression_ratios, chosen_exp_01_msd_mean, '-.k*', exp_02_avg_file_compression_ratios, chosen_exp_02_msd_mean, '--ko',exp_03_avg_file_compression_ratios, chosen_exp_03_msd_mean, ':ks',exp_03_avg_file_compression_ratios, chosen_exp_04_msd_mean, '-kx',exp_01_avg_file_compression_ratios, chosen_exp_05_msd_mean, '->k', exp_02_avg_file_compression_ratios, ones(size(exp_02_avg_file_sizes)), 'k-')
+%plot(exp_01_avg_file_compression_ratios, chosen_exp_01_msd_mean, '-.k*', exp_02_avg_file_compression_ratios, chosen_exp_02_msd_mean, '--ko',exp_03_avg_file_compression_ratios, chosen_exp_03_msd_mean, ':ks',exp_03_avg_file_compression_ratios, chosen_exp_04_msd_mean, '-kx',exp_01_avg_file_compression_ratios, chosen_exp_05_msd_mean, '->k', exp_02_avg_file_compression_ratios, ones(size(exp_02_avg_file_sizes)), 'k-')
+loglog(exp_01_avg_file_compression_ratios, chosen_exp_01_msd_mean, '-.k*', exp_02_avg_file_compression_ratios, chosen_exp_02_msd_mean, '--ko',exp_03_avg_file_compression_ratios, chosen_exp_03_msd_mean, ':ks',exp_03_avg_file_compression_ratios, chosen_exp_04_msd_mean, '-kx',exp_01_avg_file_compression_ratios, chosen_exp_05_msd_mean, '->k', exp_02_avg_file_compression_ratios, ones(size(exp_02_avg_file_sizes)), 'k-')
+
 legend('custom ffmpeg (variation 2)', 'standard ffmpeg', 'dilation (variation 1)', 'dilation with post-processing (variation 1)', 'custom ffmpeg post-processing (variation 2)', 'Location', 'northeast');
 hold off 
 xlabel('file size in bytes');
