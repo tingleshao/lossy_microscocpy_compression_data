@@ -158,21 +158,38 @@ ylabel('KL divergence values between compressed video MSD distributions and orig
 % plot single comparison plots 
 figure
 hold on 
-plot(exp_02_avg_file_compression_ratios, exp_02_ks_test_p, '--ko', exp_01_avg_file_compression_ratios, exp_05_ks_test_p, '->k', exp_02_avg_file_compression_ratios, ones(size(exp_02_avg_file_compression_ratios))*0.05, '-r' , [18.5322, 18.5322], [0, 1], '-b', [h264_data_ratio, h264_data_ratio], [0,1], '-r')
-legend('standard ffmpeg', 'custom ffmpeg post-processing (variation 2)', 'Location', 'northeast');
-set(gca, 'XScale', 'log')
+%plot(exp_02_avg_file_compression_ratios, exp_02_ks_test_p, '--ro', exp_01_avg_file_compression_ratios, exp_05_ks_test_p, '->b', exp_02_avg_file_compression_ratios, ones(size(exp_02_avg_file_compression_ratios))*0.05, '-r' , [18.4701, 18.4701], [0, 1], '-b', [h264_data_ratio, h264_data_ratio], [0,1], '-r')
+plot(exp_02_avg_file_compression_ratios, exp_02_ks_test_p, '-ro', 'LineWidth', 3, 'MarkerSize', 8)
+plot(exp_01_avg_file_compression_ratios, exp_05_ks_test_p, '->b', 'LineWidth', 3, 'MarkerSize', 8)
+plot(5:100:10000, ones([100,1])*0.05, '-k' ,'LineWidth', 3, 'MarkerSize', 8)
+plot(5:100:10000, ones([100,1])*0.1, '-k' ,'LineWidth', 3, 'MarkerSize', 8)
+plot(5:100:10000, ones([100,1])*0.5, '-k' ,'LineWidth', 3, 'MarkerSize', 8)
+plot(5:100:10000, ones([100,1])*0.9, '-k' ,'LineWidth', 3, 'MarkerSize', 8)
+
+plot([18.4701, 18.4701], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
+%plot([178, 178], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
+%plot([149, 149], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
+%plot([55, 55], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
+%plot([41, 41], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
+
+axis([5, 10000, 0, 1])
+h=legend('H.264', 'Analysis-Aware', 'Location', 'southeast');
+set(h,'FontSize',14);
+set(gca, 'XScale', 'log', 'FontSize', 14)
 hold off 
-xlabel('file size in bytes');
-ylabel('KS test p scores between compressed video MSD distributions and original video MSD distributions');
+xlabel('compression ratio');
+ylabel('KS test p score');
 
 figure
 hold on 
-plot(exp_02_avg_file_compression_ratios, exp_02_kldiv_test_values,'--ko', exp_01_avg_file_compression_ratios, exp_05_kldiv_test_values, '->k')
+plot(exp_02_avg_file_compression_ratios, exp_02_kldiv_test_values,'--ro', 'LineWidth', 3, 'MarkerSize', 8)
+plot(exp_01_avg_file_compression_ratios, exp_05_kldiv_test_values, '->b', 'LineWidth', 3, 'MarkerSize', 8)
 set(gca, 'YScale', 'log')
-set(gca, 'XScale', 'log')
+set(gca, 'XScale', 'log', 'FontSize', 14)
 
-legend('standard ffmpeg', 'custom ffmpeg post-processing (variation 2)', 'Location', 'northeast');
+h=legend('H.264', 'Analysis-Aware', 'Location', 'southeast');
+set(h,'FontSize',14);
 hold off 
-xlabel('file size in bytes');
-ylabel('KL divergence values between compressed video MSD distributions and original video MSD distributions');
+xlabel('compression ratio');
+ylabel('KL divergence value');
 
