@@ -2,4 +2,4 @@
 *.txt~
 .DS_Store
 *.pgm
-
+lossy_comp
