@@ -1,8 +1,7 @@
-
-
 # to save disk space, go over dilation between 10 to 24
 
 #./dr [save_file] -i [image_file] [dilate_diameter] [threshold_for_correlation_in_percentage] [sliding_window_size] [hard_coded_threshold] [save_file_dir] [debugging_image_dir]
+
 
 import os
 import sys
@@ -10,12 +9,11 @@ import sys
 
 def main():
     for dil in range(10, 25):
-        input_framename = sys.argv[1]
-        orig_tracking_name = "test_{}/dilate_{}_tracking".format{test, dil}
-        save_msd_file_name = "test_{}?dilate_{}_bead1"]
+        orig_tracking_name = "dilate_{0}".format(dil)
+        save_msd_file_name = "dilate_{0}_bead1".format(dil)
         bead_id = 1
 
-        os.system("matlab compute_msd_for_compression_exp({}, {}, {})".format(orig_tracking_name, bead_id, save_msd_file_name))
+        os.system("matlab -nodesktop -nosplash -r \"compute_msd_for_compression_exp('{0}', {1}, '{2}'); quit\"".format(orig_tracking_name, bead_id, save_msd_file_name))
 
 
 if __name__ == "__main__":
@@ -23,7 +21,7 @@ if __name__ == "__main__":
 
 
 """
-  % compute msd
+% compute msd
 orig_tracking_name = ['test_', format_two_digit_number(test), '/dilate_', num2str(dilate), '_tracking'];
 save_msd_file_name = ['test_', format_two_digit_number(test), '/dilate_', num2str(dilate), '_bead1'];
 bead_id = 1;
