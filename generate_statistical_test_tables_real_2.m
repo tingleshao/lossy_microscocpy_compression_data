@@ -12,11 +12,13 @@ exp_03_dilation_list = [ 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 ];
 exp_04_dilation_list = exp_03_dilation_list;
 exp_05_qp_list = exp_01_qp_list;
 
+%TODO: does ks test consider NaN as a smaller sample size? 
+
 
 %exp_02_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet6/real_';
 %exp_03_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet7/real_';
 exp_04_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet11/real_';
-ref_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/reference_msds_real/real_';
+ref_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/reference_msds_real_2/real_050317_';
 %exp_05_dir = '/Users/chongshao/dev/lossy_microscocpy_compression_data/data2/sheet8_5/real_';
 
 close all
@@ -55,12 +57,12 @@ exp_04_msd_data = read_msd_data(exp_04_dir, tau_size, test_size, exp_04_dilation
 %exp_05_msd_data = read_msd_data(exp_05_dir, tau_size, test_size, exp_05_qp_list, 'qp'); 
 
 % read the reference (original video) msd data 
-% orig_exp_msd = []; 
-% for test = 1:5
-%     msd_file_name = [ref_dir, format_two_digit_number(test), '_bead1.mat'];
-%     load(msd_file_name); 
-%     orig_exp_msd = [orig_exp_msd, msd_data]; 
-% end
+orig_exp_msd = []; 
+for test = 1:5
+    msd_file_name = [ref_dir, num2str(test), '_bead1.mat'];
+    load(msd_file_name); 
+    orig_exp_msd = [orig_exp_msd, msd_data]; 
+end
 
 % % plot and fit the distribution of one (qp) 10 video 1 bead msd 
 % tau_index = 3;
@@ -133,14 +135,14 @@ tau_index = 3;
 % exp_03_kldiv_test_values = compute_kldiv_test_row(orig_exp_msd, exp_03_msd_data, tau_index, exp_03_dilation_list);
 % 
 % % exp_04
- exp_04_kldiv_test_values = compute_kldiv_test_row(orig_exp_msd, exp_04_msd_data, tau_index, exp_04_dilation_list);
+% exp_04_kldiv_test_values = compute_kldiv_test_row(orig_exp_msd, exp_04_msd_data, tau_index, exp_04_dilation_list);
 % exp_05_kldiv_test_values = compute_kldiv_test_row(orig_exp_msd, exp_05_msd_data, tau_index, exp_05_qp_list);
 % 
 % figure
 % hold on 
 % plot(exp_01_avg_file_compression_ratios,exp_01_kldiv_test_values, '-.k*',exp_02_avg_file_compression_ratios,exp_02_kldiv_test_values, '--ko', exp_03_avg_file_compression_ratios, exp_03_kldiv_test_values, ':ks',exp_03_avg_file_compression_ratios, exp_04_kldiv_test_values, '-kx',exp_01_avg_file_compression_ratios, exp_05_kldiv_test_values, '->k')
 % 
-plot( exp_04_kldiv_test_values, '-kx')
+%plot(exp_04_kldiv_test_values, '-kx')
 
 % set(gca, 'YScale', 'log')
 % set(gca, 'XScale', 'log')
@@ -154,6 +156,8 @@ plot( exp_04_kldiv_test_values, '-kx')
 % plot single comparison plots 
 figure
 hold on 
+plot( exp_04_ks_test_h, '-kx')
+
 % exp_02_ks_test_p(9:10) = []
 % exp_02_avg_file_compression_ratios(9:10) = []
 % exp_02_kldiv_test_values(9:10) = []

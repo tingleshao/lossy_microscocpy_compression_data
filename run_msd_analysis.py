@@ -8,12 +8,12 @@ import sys
 
 
 def main():
-    for dil in range(10, 25):
+    for dil in range(1, 10):
         orig_tracking_name = "dilate_{0}".format(dil)
         save_msd_file_name = "dilate_{0}_bead1".format(dil)
         bead_id = 1
 
-        os.system("matlab -nodesktop -nosplash -r \"compute_msd_for_compression_exp('{0}', {1}, '{2}'); quit\"".format(orig_tracking_name, bead_id, save_msd_file_name))
+        os.system("matlab -nodesktop -nosplash -r \"compute_msd_for_compression_exp('{0}', {1}, '{2}'); quit();\"".format(orig_tracking_name, bead_id, save_msd_file_name))
 
 
 if __name__ == "__main__":
