@@ -62,10 +62,11 @@ real2_2_bin_dir = "";
 real2_3_bin_dir = "";
 real2_4_bin_dir = "";
 real2_5_bin_dir = "";
-
+dirs = [real2_1_bin_dir, real2_2_bin_dir, real2_3_bin_dir,real2_4_bin_dir,real2_5_bin_dir]
 
 def run_compression():
-    for qp in range(10)
+    for qp in range(10):
+
     set index = "printf "%02d" $1"
     /playpen/cshao/ffmpeg-playpen/custom_build/ffmpeg -i /playpen2/cshao/paper2_data/lossy_comp_data_set/exp_data/test_011015/test_011015_$1/nframe%4d.png -c:a copy -c:v libx264 -g 1800 test_$index/qp_$2.mkv
 
