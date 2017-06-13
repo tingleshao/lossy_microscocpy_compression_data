@@ -64,24 +64,19 @@ real2_4_bin_dir = "";
 real2_5_bin_dir = "";
 dirs = [real2_1_bin_dir, real2_2_bin_dir, real2_3_bin_dir,real2_4_bin_dir,real2_5_bin_dir]
 
+qp_list = [1,2,3,4,5,6,7,8,9,10,20,30,40,50]
 def run_compression():
     for bin_dir in dirs:
         code = generate_binary_code(bin_dir)
         # save code into file
-
-        for qp in range(10):
-        # save qp into file
-
-            cmd = "/playpen/cshao/ffmpeg-playpen/custom_build/ffmpeg -i /playpen2/cshao/paper2_data/lossy_comp_data_set/exp_data/test_011015/test_011015_$1/nframe%4d.png -c:a copy -c:v libx264 -g 1800 test_$index/qp_$2.mkv"
+        with open("/playpen2/custom_ffmpeg_data/bincode.txt", 'w') as bincode_file:
+            bincode_file.write(" ".join(code))
+        for qp in qp_list:
+            # save qp into file
+            with open("/playpen2/custom_ffmpeg_data/fqp.txt", 'w') as qp_file:
+             cmd = "/playpen/cshao/ffmpeg-playpen/custom_build/ffmpeg -i /playpen2/cshao/paper2_data/lossy_comp_data_set/exp_data/test_011015/test_011015_$1/nframe%4d.png -c:a copy -c:v libx264 -g 1800 test_$index/qp_$2.mkv"
             os.system(cmd)
-            
-def main():
-    for dil in range(10, 25):
-        input_framename = sys.argv[1]
-        threshold = sys.argv[2]
-        os.system("mkdir dilate_" + str(dil) + "_debug")
-        os.system("/afs/cs.unc.edu/home/cshao/compression_project/dr_run/data_reduction/dr test -i " + input_framename + " " + str(dil) + " 1 1 " + threshold + " dilate_" + str(dil) + "/ dilate_" + str(dil) + "_debug/")
 
 
 if __name__ == "__main__":
-    main()
+    run_compression()
