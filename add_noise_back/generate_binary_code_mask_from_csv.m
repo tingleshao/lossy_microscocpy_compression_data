@@ -20,5 +20,5 @@ for i = 1:w
     end
 end
 
-mask = mask(1:484, 1:648);
+mask = mask(1:488, 1:648);
 end
