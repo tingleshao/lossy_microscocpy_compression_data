@@ -8,7 +8,7 @@ exp_data_dir = '/playpen2/cshao/paper2_data/lossy_comp_data_set/exp_data/real_05
 
 num_of_frames = 421;
 
-for real = 1
+for real = 2:5
     save_exp_data_test_dir = [noise_back_data_dir,'/real_', num2str(real),'/'];
     if  ~exist(save_exp_data_test_dir,'dir')
         disp(['mkdir ', save_exp_data_test_dir])
