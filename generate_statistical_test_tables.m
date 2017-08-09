@@ -69,6 +69,62 @@ for test = 1:10
     orig_exp_msd = [orig_exp_msd, msd_data]; 
 end
 
+
+tau_index = 3;
+exp_01_ratio = [];
+exp_05_ratio = [];
+msd_data_for_plot = reshape(exp_01_msd_data(tau_index, :, :),10,13)';
+msd_data_for_plot5 = reshape(exp_05_msd_data(tau_index, :, :),10,13)';
+orig_msd_data_for_plot = orig_exp_msd(tau_index, :);
+for i = 1:13
+    exp_01_ratio = [exp_01_ratio, mean(msd_data_for_plot(i,:)./orig_msd_data_for_plot)]
+    exp_05_ratio = [exp_05_ratio, mean(msd_data_for_plot5(i,:)./orig_msd_data_for_plot)]
+end
+exp_03_ratio = [];
+exp_04_ratio = [];
+msd_data_for_plot3 = reshape(exp_03_msd_data(tau_index, :, :),10,20)';
+msd_data_for_plot4 = reshape(exp_04_msd_data(tau_index, :, :),10,20)';
+for i = 1:20
+    exp_03_ratio = [exp_03_ratio, mean(msd_data_for_plot3(i,:)./orig_msd_data_for_plot)];
+    exp_04_ratio = [exp_04_ratio, mean(msd_data_for_plot4(i,:)./orig_msd_data_for_plot)];
+end
+exp_02_ratio = [];
+msd_data_for_plot2 = reshape(exp_02_msd_data(tau_index, :, :),10,10)';
+for i = 1:10
+    exp_02_ratio = [exp_02_ratio, mean(msd_data_for_plot2(i,:)./orig_msd_data_for_plot)]
+end
+
+figure
+hold on 
+plot(exp_02_avg_file_compression_ratios, exp_02_ratio, '-o', 'Color', [124/255, 70/255, 34/255], 'LineWidth', 3, 'MarkerSize', 8)
+plot(exp_03_avg_file_compression_ratios, exp_03_ratio, '-*', 'Color', [44/255, 52/255, 162/255],'LineWidth', 3, 'MarkerSize', 8)
+plot(exp_03_avg_file_compression_ratios, exp_04_ratio,  '-.', 'Color', [44/255, 139/255, 162/255], 'LineWidth', 3, 'MarkerSize', 20)
+plot(exp_01_avg_file_compression_ratios, exp_01_ratio, '-x', 'Color', [34/255, 124/255, 40/255], 'LineWidth', 3, 'MarkerSize', 12)
+plot(exp_01_avg_file_compression_ratios, exp_05_ratio, '->', 'Color', [53/255, 201/255, 16/255],'LineWidth', 3, 'MarkerSize', 8)
+plot([20,300], [1,1], '-k' ,'LineWidth', 3, 'MarkerSize', 8)
+plot([20,300], [1.04,1.04], '-k' ,'LineWidth', 3, 'MarkerSize', 8)
+plot([20,300], [0.98,0.98], '-k' ,'LineWidth', 3, 'MarkerSize', 8)
+plot([287, 287], [0.8, 1.2], '-k','LineWidth', 3, 'MarkerSize', 8)
+
+axis([20, 300, 0.8, 1.2])
+
+h = legend('H.264', 'Analysis-Aware (V1)', 'Analysis-Aware + Post Processing (V1)',  'Analysis-Aware (V2)', 'Analysis-Aware + Post Processing (V2)','Location', 'northeast');
+set(h,'FontSize',14);
+set(gca, 'XScale', 'log', 'FontSize', 14)
+hold off 
+xlabel('compression ratio');
+ylabel('Normalized MSD value');
+
+
+%%%%%%%%%%%%%%%%%% statistical tests %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% statistical tests %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% statistical tests %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% statistical tests %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% statistical tests %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% statistical tests %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% statistical tests %%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% statistical tests %%%%%%%%%%%%%%%%%%
+
 % % plot and fit the distribution of one (qp) 10 video 1 bead msd 
 % tau_index = 3;
 % qp_index = 2;
@@ -94,6 +150,7 @@ end
 % hist(histdata);
 % hold off 
 
+if 1
 % generate the ks test result table 
 % exp_01
 tau_index = 3;
@@ -111,21 +168,21 @@ tau_index = 3;
 % exp_05
 [exp_05_ks_test_h, exp_05_ks_test_p] = compute_ks_test_row(orig_exp_msd, exp_05_msd_data, tau_index, exp_05_qp_list);
 
-figure
-hold on 
-plot(exp_01_avg_file_compression_ratios, exp_01_ks_test_h, '-.k*',exp_02_avg_file_compression_ratios, exp_02_ks_test_h, '--ko', exp_03_avg_file_compression_ratios, exp_03_ks_test_h, ':ks',exp_03_avg_file_compression_ratios, exp_04_ks_test_h, '-kx',exp_01_avg_file_compression_ratios, exp_05_ks_test_h, '->k')
-set(gca, 'XScale', 'log')
+%figure
+%%hold on 
+%plot(exp_01_avg_file_compression_ratios, exp_01_ks_test_h, '-.k*',exp_02_avg_file_compression_ratios, exp_02_ks_test_h, '--ko', exp_03_avg_file_compression_ratios, exp_03_ks_test_h, ':ks',exp_03_avg_file_compression_ratios, exp_04_ks_test_h, '-kx',exp_01_avg_file_compression_ratios, exp_05_ks_test_h, '->k')
+%set(gca, 'XScale', 'log')
 
-hold off
-figure
-hold on 
-plot(exp_01_avg_file_compression_ratios, exp_01_ks_test_p, '-.k*', exp_02_avg_file_compression_ratios, exp_02_ks_test_p, '--ko', exp_03_avg_file_compression_ratios, exp_03_ks_test_p, ':ks', exp_03_avg_file_compression_ratios, exp_04_ks_test_p, '-kx', exp_01_avg_file_compression_ratios, exp_05_ks_test_p, '->k', exp_02_avg_file_compression_ratios, ones(size(exp_02_avg_file_compression_ratios))*0.05, '-r')
-legend('custom ffmpeg (variation 2)', 'standard ffmpeg', 'dilation (variation 1)', 'dilation with post-processing (variation 1)', 'custom ffmpeg post-processing (variation 2)', 'Location', 'northeast');
-set(gca, 'XScale', 'log')
+%hold off
+%figure
+%hold on 
+%%plot(exp_01_avg_file_compression_ratios, exp_01_ks_test_p, '-.k*', exp_02_avg_file_compression_ratios, exp_02_ks_test_p, '--ko', exp_03_avg_file_compression_ratios, exp_03_ks_test_p, ':ks', exp_03_avg_file_compression_ratios, exp_04_ks_test_p, '-kx', exp_01_avg_file_compression_ratios, exp_05_ks_test_p, '->k', exp_02_avg_file_compression_ratios, ones(size(exp_02_avg_file_compression_ratios))*0.05, '-r')
+%legend('custom ffmpeg (variation 2)', 'standard ffmpeg', 'dilation (variation 1)', 'dilation with post-processing (variation 1)', 'custom ffmpeg post-processing (variation 2)', 'Location', 'northeast');
+%set(gca, 'XScale', 'log')
 
-hold off 
-xlabel('file size in bytes');
-ylabel('KS test p scores between compressed video MSD distributions and original video MSD distributions');
+%hold off 
+%xlabel('file size in bytes');
+%ylabel('KS test p scores between compressed video MSD distributions and original video MSD distributions');
 
 
 
@@ -143,22 +200,17 @@ exp_03_kldiv_test_values = compute_kldiv_test_row(orig_exp_msd, exp_03_msd_data,
 exp_04_kldiv_test_values = compute_kldiv_test_row(orig_exp_msd, exp_04_msd_data, tau_index, exp_04_dilation_list);
 exp_05_kldiv_test_values = compute_kldiv_test_row(orig_exp_msd, exp_05_msd_data, tau_index, exp_05_qp_list);
 
-figure
-hold on 
-plot(exp_01_avg_file_compression_ratios, exp_01_kldiv_test_values, '-.k*',exp_02_avg_file_compression_ratios, exp_02_kldiv_test_values, '--ko', exp_03_avg_file_compression_ratios, exp_03_kldiv_test_values, ':ks',exp_03_avg_file_compression_ratios, exp_04_kldiv_test_values, '-kx',exp_01_avg_file_compression_ratios, exp_05_kldiv_test_values, '->k')
+%figure
+%hold on 
+%plot(exp_01_avg_file_compression_ratios, exp_01_kldiv_test_values, '-.k*',exp_02_avg_file_compression_ratios, exp_02_kldiv_test_values, '--ko', exp_03_avg_file_compression_ratios, exp_03_kldiv_test_values, ':ks',exp_03_avg_file_compression_ratios, exp_04_kldiv_test_values, '-kx',exp_01_avg_file_compression_ratios, exp_05_kldiv_test_values, '->k')
 %set(gca, 'YScale', 'log')
-set(gca, 'YScale', 'log')
-set(gca, 'XScale', 'log')
+%set(gca, 'YScale', 'log')
+%set(gca, 'XScale', 'log')
 
-legend('custom ffmpeg (variation 2)', 'standard ffmpeg', 'dilation (variation 1)', 'dilation with post-processing (variation 1)', 'custom ffmpeg post-processing (variation 2)', 'Location', 'northeast');
-hold off 
-xlabel('file size in bytes');
-ylabel('KL divergence values between compressed video MSD distributions and original video MSD distributions');
-
-
-
-
-
+%legend('custom ffmpeg (variation 2)', 'standard ffmpeg', 'dilation (variation 1)', 'dilation with post-processing (variation 1)', 'custom ffmpeg post-processing (variation 2)', 'Location', 'northeast');
+%hold off 
+%xlabel('file size in bytes');
+%ylabel('KL divergence values between compressed video MSD distributions and original video MSD distributions');
 
 % plot single comparison plots 
 figure
@@ -172,11 +224,13 @@ plot(exp_01_avg_file_compression_ratios, exp_05_ks_test_p, '->', 'Color', [53/25
 %plot(5:100:10000, ones([100,1])*0.05, '-k' ,'LineWidth', 3, 'MarkerSize', 8)
 %plot(5:100:10000, ones([100,1])*0.1, '-k' ,'LineWidth', 3, 'MarkerSize', 8)
 %plot(5:100:10000, ones([100,1])*0.5, '-k' ,'LineWidth', 3, 'MarkerSize', 8)
-plot(5:100:10000, ones([100,1])*0.9, '-k' ,'LineWidth', 3, 'MarkerSize', 8)
+%plot(5:100:10000, ones([100,1])*0.9, '-k' ,'LineWidth', 3, 'MarkerSize', 8)
+plot(5:100:10000, ones([100,1])*0.95, '-k' ,'LineWidth', 3, 'MarkerSize', 8)
+plot([18.4701, 18.4701], [10^(-10), 10], '-k','LineWidth', 3, 'MarkerSize', 8)
 
-plot([18.4701, 18.4701], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
-plot([33.1, 33.1], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
-plot([41.2, 41.2], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
+%plot([18.4701, 18.4701], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
+%plot([32.9, 32.9], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
+%plot([39.2, 39.2], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
 
 %plot([178, 178], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
 %plot([149, 149], [0, 1], '-k','LineWidth', 3, 'MarkerSize', 8)
@@ -217,4 +271,4 @@ set(h,'FontSize',14);
 hold off 
 xlabel('compression ratio');
 ylabel('KL divergence value');
-
+end
